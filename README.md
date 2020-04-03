@@ -774,7 +774,7 @@ val someString = (json \ "someString").extractOpt[String]
 
 ```scala
 val formats: Formats = new DefaultFormats {
-  override val strictOptionParsingPre36: Boolean = true
+  override val strictOptionParsing: Boolean = true
 }
 case class SerializationSpec(someInt: Int, someString: Option[String])
 val json = parse("""{ "someInt": 123 }""")
