@@ -564,7 +564,7 @@ object Extraction {
         } catch {
           case e @ MappingException(msg, _) =>
             if (descr.isOptional &&
-                (!formats.strictOptionParsing || extract(json, ScalaType[Null](implicitly)) == null))
+                (!(formats.strictOptionParsing || formats.strictOptionParsingPre36) || extract(json, ScalaType[Null](implicitly)) == null))
               defv(None)
             else fail("No usable value for " + descr.name + "\n" + msg, e)
         }
