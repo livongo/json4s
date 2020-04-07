@@ -89,14 +89,15 @@ Summary of the features:
 * Serialization
 * Low-level pull parser API
 
+## Livongo Specific Build Notes
+
+1. The Livongo fork of json4s currently only publishes to the Livongo private Artifactory at https://artifactory.prod.livongo.com.
+2. The build version must be updated manually in the `project/build.scala` file any time a new version is required.  Update the version number after `livongo-`.  For example if the current version is `version := "3.6.7-livongo-1.0.0"` the next minor version update should be `version := "3.6.7-livongo-1.0.1`.  
+3. To attempt to publish to the Livongo artifactory, you must set the `ARTIFACTORY_USER` and `ARTIFACTORY_PASS` environment variables to credentials which have write access, then run the appropriate sbt commands.  `sbt clean compile test package publish` will run a full build and publish.
+4. Note that you must also be connected to VPN or otherwise have HTTP access to the Livongo Artifactory server.
+
 Installation
 ============
-
-You can add the json4s as a dependency in following ways. Note, replace {latestVersion} with correct Json4s version.
-
-You can find available versions here:
-
-http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.json4s%22
 
 ### SBT users
 
