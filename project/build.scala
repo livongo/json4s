@@ -29,7 +29,7 @@ object build {
 
   val mavenCentralFrouFrou = Seq(
     publishTo := Some(Artifactory.artifactoryResolver),
-    publishMavenStyle := false,
+    publishConfiguration := publishConfiguration.value.withOverwrite(true),
     credentials ++= Artifactory.artifactoryCredentials,
     homepage := Some(new URL("https://github.com/livongo/json4s")),
     startYear := Some(2009),

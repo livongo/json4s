@@ -3,7 +3,8 @@ addSbtPlugin("com.eed3si9n"     % "sbt-buildinfo"        % "0.9.0")
 addSbtPlugin("org.xerial.sbt"   % "sbt-sonatype"         % "2.5")
 addSbtPlugin("com.jsuereth"     % "sbt-pgp"              % "1.1.2")
 addSbtPlugin("com.timushev.sbt" % "sbt-updates"          % "0.4.1")
- 
+addSbtPlugin("com.github.gseitz" % "sbt-release"         % "1.0.13")
+
 scalacOptions ++= Seq("-unchecked", "-deprecation", "-feature")
 
 resolvers += Resolver.url(
@@ -11,4 +12,4 @@ resolvers += Resolver.url(
   url("http://artifactory.prod.livongo.com/artifactory/plugins-release-local")
 )(Resolver.ivyStylePatterns)
 
-addSbtPlugin("livongo" %% "build-plugins" % "0.2.1")
+addSbtPlugin("livongo" %% "build-plugins" % "0.2.0")
