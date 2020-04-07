@@ -6,3 +6,9 @@ addSbtPlugin("com.timushev.sbt" % "sbt-updates"          % "0.4.1")
 
 scalacOptions ++= Seq("-unchecked", "-deprecation", "-feature")
 
+resolvers += Resolver.url(
+  "Artifactory ivy",
+  url("http://artifactory.prod.livongo.com/artifactory/plugins-release-local")
+)(Resolver.ivyStylePatterns)
+
+addSbtPlugin("livongo" %% "build-plugins" % "0.2.0")
