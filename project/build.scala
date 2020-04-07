@@ -1,8 +1,10 @@
 import sbt._
 import Keys._
+
 import xml.Group
 import MimaSettings.mimaSettings
 import com.typesafe.tools.mima.plugin.MimaKeys.{mimaPreviousArtifacts, mimaReportBinaryIssues}
+import livongo.build.project.{Artifactory, ArtifactoryPublisherPlugin}
 
 object build {
   import Dependencies._
@@ -23,21 +25,20 @@ object build {
       )
   }
 
+  enablePlugins(ArtifactoryPublisherPlugin)
+
   val mavenCentralFrouFrou = Seq(
-    publishTo := Some(
-      if (isSnapshot.value)
-        Opts.resolver.sonatypeSnapshots
-      else
-        Opts.resolver.sonatypeStaging
-    ),
-    homepage := Some(new URL("https://github.com/json4s/json4s")),
+    publishTo := Some(Artifactory.artifactoryResolver),
+    publishMavenStyle := false,
+    credentials ++= Artifactory.artifactoryCredentials,
+    homepage := Some(new URL("https://github.com/livongo/json4s")),
     startYear := Some(2009),
     licenses := Seq(("Apache-2.0", new URL("http://www.apache.org/licenses/LICENSE-2.0"))),
     pomExtra := {
       pomExtra.value ++ Group(
       <scm>
-        <url>http://github.com/json4s/json4s</url>
-        <connection>scm:git:git://github.com/json4s/json4s.git</connection>
+        <url>http://github.com/livongo/json4s</url>
+        <connection>scm:git:git://github.com/livongo/json4s.git</connection>
       </scm>
       <developers>
         <developer>
@@ -66,7 +67,7 @@ object build {
     scalacOptions in (Compile, doc) ++= {
       val base = (baseDirectory in LocalRootProject).value.getAbsolutePath
       val hash = sys.process.Process("git rev-parse HEAD").lineStream_!.head
-      Seq("-sourcepath", base, "-doc-source-url", "https://github.com/json4s/json4s/tree/" + hash + "€{FILE_PATH}.scala")
+      Seq("-sourcepath", base, "-doc-source-url", "https://github.com/livongo/json4s/tree/" + hash + "€{FILE_PATH}.scala")
     },
     scalacOptions ++= {
       CrossVersion.partialVersion(scalaVersion.value) match {
@@ -86,7 +87,7 @@ object build {
           Seq("-Ywarn-unused:imports")
       }
     },
-    version := "3.6.8-SNAPSHOT",
+    version := "3.6.7-livongo-1.0.0",
     javacOptions ++= Seq("-target", "1.8", "-source", "1.8"),
     Seq(Compile, Test).map { scope =>
       unmanagedSourceDirectories in scope += {
