@@ -1,7 +1,6 @@
 import xml.Group
 import Dependencies._
 import build._
-import livongo.build.project.ArtifactoryPublisherPlugin
 
 lazy val root = Project(
   id = "json4s",
