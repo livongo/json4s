@@ -36,10 +36,6 @@ object build {
     licenses := Seq(("Apache-2.0", new URL("http://www.apache.org/licenses/LICENSE-2.0"))),
     pomExtra := {
       pomExtra.value ++ Group(
-      <scm>
-        <url>http://github.com/livongo/json4s</url>
-        <connection>scm:git:git://github.com/livongo/json4s.git</connection>
-      </scm>
       <developers>
         <developer>
           <id>casualjim</id>
